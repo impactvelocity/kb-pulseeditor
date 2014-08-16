@@ -29,12 +29,15 @@
 
                         // console.log(api);
                         $(".videoThumbnail").css("background-image", "url(" + $thumbnailURL + ")");
-                        $(".videoInformation h4").text(api.data.title);
+                        $(".videoInformation h6").text(api.data.title);
                         $(".videoDuration").text(secondstotime(api.data.duration));
+                        $("#show-tutorial-video").attr("href", "http://www.youtube.com/watch?v=" + $youtubeID);
 
                     });
 
                 $videoCheck = 1;
+
+                $(".videoTutorialBlock").show();
 
 
             });
@@ -61,6 +64,12 @@
                 s = Math.floor((t - Date.parse("1/1/70")) / 3600000) + s.substr(2);
             return s;
         }
+
+        // popup
+        $('#show-tutorial-video').magnificPopup({
+            type: 'iframe'
+        });
+
 
     });
 

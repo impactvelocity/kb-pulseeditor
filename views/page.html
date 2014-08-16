@@ -28,18 +28,20 @@
             {{#meta.title}}<h1 class="title">{{meta.title}}</h1>{{/meta.title}}
             {{#meta.description}}<h3 class="description">{{meta.description}}</h3>{{/meta.description}}
 
-
-            <div class="videoTutorialBlock clearfix">
-                <div class="pull-left videoThumbnail">
-                    <img src="http://nodo.s3.amazonaws.com/assets/images/graphics/subtle-play-button.png" >
+            
+            <a id="show-tutorial-video" href="http://www.youtube.com/watch?v=7HKoqNJtMTQ">
+                <div class="videoTutorialBlock clearfix" style="display:none;">
+                    <div class="pull-left videoThumbnail">
+                        <img src="http://nodo.s3.amazonaws.com/assets/images/graphics/subtle-play-button.png" >
+                    </div>
+                    <div class="pull-left videoInformation">
+                        <h4>Click Here Watch The Video</h4>
+                        <h6>tutorial / helpful video</h6>
+                        <span style="font-weight: bold; margin-right: 5px;" ><i class="fa fa-youtube-play"></i> Launch Video</span>
+                        <span><i class="fa fa-clock-o"></i> <span class="videoDuration">03:23</span></span>
+                    </div>
                 </div>
-                <div class="pull-left videoInformation">
-                    <h6>tutorial / helpful video</h6>
-                    <h4>Watch The Video</h4>
-                    <a href="#"><i class="fa fa-youtube-play"></i> Launch Video</a>
-                    <span><i class="fa fa-clock-o"></i> <span class="videoDuration">03:23</span></span>
-                </div>
-            </div>
+            </a>
 
             {{{ content }}}
 

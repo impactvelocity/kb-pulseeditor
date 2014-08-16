@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>{{#meta.title}}{{meta.title}} - {{/meta.title}}{{config.site_title}}</title>
+    {{#meta.description}}<meta name="description" content="{{meta.description}}">{{/meta.description}}
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="shortcut icon" href="http://nodo.s3.amazonaws.com/assets/images/nodo/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="http://nodo.s3.amazonaws.com/assets/images/nodo/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/bower_components/highlightjs/styles/solarized_light.css">
+    <link rel="stylesheet" href="/styles/raneto.css">
+    <link rel="stylesheet" href="/styles/ghostdown.css">
+
+    <link rel="stylesheet" href="http://cdnjs.cloudflare.com/ajax/libs/codemirror/4.4.0/codemirror.css">
+
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
+
+</head>
+<body class="{{body_class}}">
+
+    <header class="header">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <a href="/" class="logo">
+                        <img src="http://nodo.s3.amazonaws.com/assets/images/nodo/small-pulse-icon.png" alt="">
+                        <b>Pulse</b> Editor <span class="account_free openIntegrationsPro"> Documentation</span>
+                    </a>
+
+                </div>
+                <div class="col-sm-6">
+
+                    <a href="http://app.pulseeditor.com" class="goBackToApp pull-right">Go Back To App</a>
+
+                    <form class="search-form form-inline pull-right" role="form" action="/">
+                        <div class="form-group">
+                            <input type="search" class="form-control topSearch" name="search" id="search" size="30" value="{{search}}" placeholder="Search Through Support...">
+                        </div>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="container-fluid">
+       
+
+       <div class="row">
+            
+            <section class="content clearfix">
+
+            <div class="col-md-6">
+
+                <div style="padding-bottom:20px;" >
+                    
+                    <span class="label label-primary" style="cursor:pointer;" id="addLink"  >Add Link</span>
+                    <span class="label label-success" style="cursor:pointer;" id="addImage" >Add Image</span>
+                
+                </div>
+
+                <textarea id="entry">{{ content }}</textarea>
+
+                <div style="padding-top:20px;" >
+
+                    <span class="label label-default" ><b>Image URL:</b> http://nodo.s3.amazonaws.com/assets/images/support </span>
+                
+                </div>
+
+            </div>
+
+            <div class="col-md-6 editArea" >
+
+                <form action="/savenewkb" method="post" >
+                    <label>Title</label>
+                    <input type="text" name="title" value="{{ meta.title }}" placeholder="KB Title" style="display: block;" >
+                    <label>Desc</label>
+                    <input type="text" name="desc" value="{{ meta.description }}" placeholder="KB Snippet" style="display: block;" >
+                    <label>Category - {{ category }} </label>
+                    <select name="category" style="display: block;" id="setCategory" >
+                        <option value="index">Index</option>
+                        <option value="introduction">Intro</option>
+                        <option value="page editor">Page Editor</option>
+                        <option value="integrations">Integrations</option>
+                        <option value="hosting">Hosting</option>
+                        <option value="split testing">Split Testing</option>
+                        <option value="faq">FAQ</option>
+                    </select>
+                    <label>File Name: <span>(must end in .md)</span></label>
+                    <input type="text" name="filename" value="{{ filename }}" placeholder="filename" style="display: block;" >
+                    <label>Sorting <span>(optional)</span></label>
+                    <select name="sort" id="setSort" style="display: block;">
+                        <option value="none">-</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                        <option value="11">11</option>
+                        <option value="12">12</option>
+                        <option value="13">13</option>
+                        <option value="14">14</option>
+                        <option value="15">15</option>
+                    </select>
+                    <input type="hidden" name="markdown" id="markdownSave" >
+                    <input type="hidden" name="old_filename" value="{{ filename }}" >
+                    <input type="hidden" name="old_category" value="{{ category }}" >
+                    <input type="hidden" name="nothing" id="category" value="{{ category }}" >
+                    <input type="hidden" name="nothingx" id="sort" value="{{ sort }}" >
+                </form>
+                    
+                <a href="#" id="getCode" class="btn btn-primary btn-lg" >Save Article</a>
+        
+            </div>
+
+            </section>
+
+       </div>
+
+    </div>
+
+    <footer class="footer">
+        <div class="container-fluid">
+
+            {{#config.copyright}}
+            <p class="copyright pull-right">{{{config.copyright}}}</p>
+            {{/config.copyright}}
+
+        </div>
+    </footer>
+
+    <script src="/bower_components/jquery/dist/jquery.min.js"></script>
+    
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/4.4.0/codemirror.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/codemirror/4.4.0/mode/markdown/markdown.js" ></script>
+    
+    <script>
+
+        var editor = CodeMirror.fromTextArea(document.getElementById("entry"), {
+            lineNumbers: true,
+            mode: "markdown/markdown",
+            matchBrackets: true,
+            lineWrapping: true
+        });
+
+        $("#addImage").click(function() {
+            
+            var myImage = '![](link_to_image)';
+            editor.replaceSelection( myImage, "end" );
+
+        });
+
+        $("#addLink").click(function() {
+            
+            var myLink = '[Text](link_here)';
+            editor.replaceSelection( myLink, "end" );
+
+        });
+
+        // var fileContent = #{JSON.stringify(fileContent)};
+        // console.log(fileContent);
+
+        $("#getCode").click(function() {
+
+            $("#markdownSave").val(editor.getValue());
+
+            $("form").submit();
+
+            return false;
+        });
+
+        // category
+        $category = $("#category").val();
+        $("#setCategory").val($category);
+
+        // sort
+        $sort = $("#sort").val();
+        $("#setSort").val($sort);
+
+    </script>
+
+    <script type="text/javascript" src="//use.typekit.net/uju4aiu.js"></script>
+    <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+</body>
+</html>

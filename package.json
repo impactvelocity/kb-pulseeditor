@@ -1,6 +1,6 @@
 {
     "name": "raneto",
-    "version": "0.6.0-3",
+    "version": "0.6.0-22",
     "description": "Markdown powered Knowledgebase",
     "author": "Gilbert Pellegrom <gilbert@pellegrom.me>",
     "license": "MIT",
@@ -44,7 +44,8 @@
         "static-favicon": "~1.0.0",
         "underscore": "^1.6.0",
         "underscore.string": "^2.3.3",
-        "validator": "^3.13.0"
+        "validator": "^3.13.0",
+        "http-auth": "2.1.9"
     },
     "subdomain": "pulseeditor",
     "domains": [

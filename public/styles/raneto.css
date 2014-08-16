@@ -309,13 +309,14 @@ body{
 .videoInformation h4{
     /*font-weight: bold;*/
     font-size: 24px;
-    margin-top: 7px;
+    margin-top: 10px;
     margin-bottom: 4px;
 }
 
 .videoInformation h6{
     margin-bottom: 0px;
-    margin-top: 10px;
+    margin-top: 6px;
+    margin-bottom: 6px;
     font-weight: bold;
     color: #A0A0A0;
 }
@@ -407,4 +408,23 @@ body{
     #home-search { margin-bottom: 10px; }
 }
 
+.editArea input,
+.editArea select{
+    width: 100%;
+    margin-bottom: 15px;
+}
 
+.editArea label span{
+    font-weight: normal;
+    color: #8e8e8e;
+}
+
+.CodeMirror {
+  border: 2px solid #eee !important;
+  border-radius: 4px;
+  height: auto !important;
+}
+.CodeMirror-scroll {
+  overflow-y: hidden !important;
+  overflow-x: auto !important;
+}
